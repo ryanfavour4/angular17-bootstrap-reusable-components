@@ -1,0 +1,211 @@
+<div class="row row-cols-1 row-cols-sm-2">
+  <div class="col my-2">
+    <div class="card">
+      <div class="card-body">
+        <h3>Reactive Form Method</h3>
+        <br />
+        <form (submit)="submitApplyForm()" [formGroup]="applyForm">
+          <app-nginput
+            label="Full Name"
+            name="name"
+            type="text"
+            [control]="applyForm.controls.name"
+          />
+
+          <app-nginput
+            label="Age"
+            name="age"
+            type="number"
+            [control]="applyForm.controls.age"
+          />
+
+          <app-nginput
+            label="Date of Birth"
+            name="dateOfBirth"
+            type="date"
+            [control]="applyForm.controls.dateOfBirth"
+          />
+
+          <app-nginput
+            label="User Name"
+            name="username"
+            type="username"
+            [control]="applyForm.controls.username"
+          />
+
+          <app-nginput
+            label="Email"
+            name="email"
+            type="email"
+            [control]="applyForm.controls.email"
+          />
+
+          <app-nginput
+            label="Password"
+            name="password"
+            type="password"
+            [control]="applyForm.controls.password"
+          />
+
+          <app-nginput
+            label="Color"
+            name="color"
+            type="color"
+            [control]="applyForm.controls.color"
+          />
+
+          <app-nginput
+            label="Photo"
+            name="photo"
+            type="file"
+            [control]="applyForm.controls.photo"
+          />
+
+          <app-selects
+            [options]="genderOptions"
+            label="Gender"
+            name="gender"
+            [control]="applyForm.controls.password"
+          />
+
+          <app-text-area
+            label="Comment"
+            name="comment"
+            [control]="applyForm.controls.comment"
+          />
+
+          <app-nginput
+            label="Assurance Level"
+            name="assuranceLevel"
+            type="range"
+            [control]="applyForm.controls.assuranceLevel"
+          />
+
+          <app-choices
+            label="Agree to terms"
+            name="agreeToTerms"
+            type="checkbox"
+            infoText="Code base. Listen to me I like to write my comments the way I like to
+          write my coffee really hot and really sexy. Ha ha ha This is so
+          fun.Ohh bleeding gums. It's still writing. This is a crazy extension.
+          ohh, I love it. Microsoft, you are just amazing, yeah."
+            [control]="applyForm.controls.agreeToTerms"
+          />
+          <br />
+          <app-button type="button" variant="primary">Submit Form</app-button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECOND WAY TO USE THE INPUT -->
+  <div class="col my-2">
+    <div class="card">
+      <div class="card-body">
+        <h3>React Input Type Method</h3>
+        <br />
+        <form (submit)="submitForm()">
+          <app-inputs
+            [value]="user.name"
+            (onChange)="setUser($event)"
+            label="Full Name"
+            name="name"
+            type="text"
+          />
+
+          <app-inputs
+            [value]="user.age"
+            (onChange)="setUser($event)"
+            label="Age"
+            name="age"
+            type="number"
+          />
+
+          <app-inputs
+            label="Date of Birth"
+            name="dateOfBirth"
+            [value]="user.dateOfBirth"
+            (onChange)="setUser($event)"
+            type="date"
+          />
+
+          <app-inputs
+            label="Url"
+            type="url"
+            name="url"
+            [value]="user.url"
+            (onChange)="setUser($event)"
+          />
+
+          <app-inputs
+            label="Email"
+            type="email"
+            name="email"
+            [value]="user.email"
+            (onChange)="setUser($event)"
+          />
+
+          <app-inputs
+            label="Password"
+            type="password"
+            name="password"
+            [value]="user.password"
+            (onChange)="setUser($event)"
+          />
+
+          <app-inputs
+            label="Color"
+            type="color"
+            name="color"
+            [value]="user.color"
+            (onChange)="setUser($event)"
+          />
+
+          <app-inputs
+            [value]="user.photo"
+            (onChange)="setUser($event)"
+            label="Photo"
+            name="photo"
+            type="file"
+          />
+
+          <app-selects
+            [options]="genderOptions"
+            (onChange)="setUser($event)"
+            label="Gender"
+            layout="multiple"
+            name="gender"
+            [value]="user.gender"
+          />
+
+          <app-text-area
+            label="Comment"
+            name="comment"
+            [value]="user.comment"
+            (onChange)="setUser($event)"
+          />
+
+          <app-inputs
+            label="Assurance LV."
+            name="assuranceLevel"
+            type="range"
+            [value]="user.assuranceLevel"
+            (onChange)="setUser($event)"
+            [infoText]="user.assuranceLevel"
+          />
+
+          <app-choices
+            type="checkbox"
+            label="Agree to terms"
+            name="agreeToTerms"
+            [value]="user.agreeToTerms"
+            (onChange)="setUser($event)"
+            infoText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur officiis numquam vitae. Saepe provident rerum rem ipsam dignissimos, repellendus quibusdam sint eligendi animi incidunt quia nam, voluptatum blanditiis optio accusantium?"
+          />
+          <br />
+          <app-button type="button" variant="primary">Submit Form</app-button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

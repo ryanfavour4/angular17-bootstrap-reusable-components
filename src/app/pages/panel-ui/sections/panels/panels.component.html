@@ -1,0 +1,44 @@
+<!-- !! WINDOW UI PANE -->
+<div
+  id="panel"
+  class="panel {{ !collapse ? 'panel-collapsed' : '' }} {{
+    collapse ? 'collapsed' : ''
+  }} {{ fullscreen ? 'panel-fullscreen' : '' }}"
+>
+  <div class="panel-hdr">
+    <h2>
+      {{ titleBold }}
+      <span class="fw-300"
+        ><i>{{ titleItalic }}</i></span
+      >
+    </h2>
+    <div class="panel-toolbar">
+      <button
+        class="btn btn-panel waves-effect waves-themed"
+        data-action="panel-collapse"
+        (click)="toggleCollapse()"
+        data-original-title="Collapse"
+      ></button>
+      <button
+        class="btn btn-panel waves-effect waves-themed"
+        data-action="panel-fullscreen"
+        (click)="toggleFullscreen()"
+        data-original-title="Fullscreen"
+      ></button>
+      <button
+        class="btn btn-panel waves-effect waves-themed"
+        data-action="panel-close"
+        data-original-title="Close"
+        (click)="storePanelToDeleteAndShowModal($event)"
+      ></button>
+    </div>
+  </div>
+  <div
+    class="panel-container collapse {{ collapse ? 'show' : '' }}"
+    style="min-height: 419px"
+  >
+    <div class="panel-content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

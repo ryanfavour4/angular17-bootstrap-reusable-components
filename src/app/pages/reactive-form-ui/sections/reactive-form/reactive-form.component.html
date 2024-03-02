@@ -1,0 +1,147 @@
+<div [style]="style" class="card">
+  <div class="card-body">
+    <div class="mb-5">
+      <h3>{{ title }}</h3>
+      <p>{{ description }}</p>
+    </div>
+
+    <form class="{{ class }}" (submit)="submitForm($event)" [formGroup]="form">
+      @for (prop of formObjectArray; track $index) {
+      <!-- Check to see if the item has an options array else render an input type that doest require options -->
+      @if (prop.options) {
+      <!-- SWITCH FUNCTION TO RENDER ITEMS WITH OPTIONS -->
+      @switch (prop.type) {
+      <!-- If the item is a radio button  -->
+      @case ('radio') {
+      <div class="{{ 'my-' + distance }}">
+        <app-choices
+          type="radio"
+          [label]="prop.label"
+          [options]="prop.options"
+          [control]="form.controls[prop.key]"
+          class="{{ 'my-' + distance }}"
+          [infoText]="prop.description"
+        />
+        <!--  -->
+      </div>
+      } @case ('select') {
+      <app-selects
+        [label]="prop.label"
+        [options]="prop.options"
+        [control]="form.controls[prop.key]"
+        class="{{ 'my-' + distance }}"
+        [infoText]="prop.description"
+      />
+      }
+      <!-- END OF SWITCH FUNCTION TO RENDER ITEMS WITH OPTIONS  -->
+      }
+      <!-- ITEMS BELOW DON'T HAVE OPTIONS  -->
+      } @else {
+      <!-- SWITCH CASE FOR TAGS WITHOUT OPTIONS -->
+      @switch (prop.type) {
+      <!-- TEXT AREA -->
+      @case ('text-area') {
+      <app-text-area
+        [label]="prop.label"
+        [name]="prop.key"
+        [control]="form.controls[prop.key]"
+        class="{{ 'my-' + distance }}"
+        [infoText]="prop.description"
+      />
+      }
+      <!-- CHECKBOX -->
+      @case ('checkbox') {
+      <app-choices
+        type="checkbox"
+        [label]="prop.label"
+        [name]="prop.key"
+        [control]="form.controls[prop.key]"
+        class="{{ 'my-' + distance }}"
+        [infoText]="prop.description"
+      />
+      } @default{
+      <app-nginput
+        [label]="prop.label"
+        [name]="prop.key"
+        [type]="prop.type"
+        [control]="form.controls[prop.key]"
+        class="{{ 'my-' + distance }}"
+        [infoText]="prop.description"
+      />
+      }
+      <!-- SWITCH CASE FOR TAGS WITHOUT OPTIONS -->
+      }
+      <!-- END OF ELSE BLOCK TO CHECK FOR OPTION -->
+      }
+
+      <!--! ERROR MESSAGE VALIDATION ALERT -->
+      <!-- ERROR MESSAGE VALIDATION ALERT -->
+      @if(form.get(prop.key).invalid && (form.get(prop.key).dirty ||
+      form.get(prop.key).touched)){
+
+      <!-- validation for required  -->
+      @if(form.get(prop.key).errors.required){
+      <app-alert dismissible="true" variant="danger">
+        You have to provide a value.
+      </app-alert>
+      }
+
+      <!-- validation for min  -->
+      @if(form.get(prop.key).errors.min){
+      <app-alert dismissible="true" variant="danger">
+        You have to provide a value greater or equal to
+        {{ form.get(prop.key).errors.min.min }}
+      </app-alert>
+      }
+
+      <!-- validation for max -->
+      @if(form.get(prop.key).errors?.max){
+      <app-alert dismissible="true" variant="danger">
+        You have to provide a value less or equal to
+        {{ form.get(prop.key).errors.max.max }}
+      </app-alert>
+      }
+
+      <!-- validation for minLength -->
+      @if(form.get(prop.key).errors?.minlength){
+      <app-alert dismissible="true" variant="danger">
+        Minimum length is
+        {{ form.get(prop.key).errors.minlength.requiredLength }}
+      </app-alert>
+      }
+
+      <!-- validation for maxLength -->
+      @if(form.get(prop.key).errors?.maxlength){
+      <app-alert dismissible="true" variant="danger">
+        Maximum length is
+        {{ form.get(prop.key).errors.maxlength.requiredLength }}
+      </app-alert>
+      }
+
+      <!-- validation for pattern -->
+      @if(form.get(prop.key).errors?.pattern){
+      <app-alert dismissible="true" variant="danger">
+        The value does not match the required pattern.
+      </app-alert>
+      }
+
+      <!-- validation for email -->
+      @if(form.get(prop.key).errors?.email){
+      <app-alert dismissible="true" variant="danger">
+        Please enter a valid email address.
+      </app-alert>
+      }
+      <!-- END OF VALIDATION -->
+      }
+      <!-- END OF FOR LOOP -->
+      }
+      <hr class="mt-6 mb-3" />
+      <div class="d-flex gap-3">
+        <app-button type="submit" variant="primary">Submit Form</app-button>
+        <app-button (click)="clearForm()" type="reset">Reset Form</app-button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <pre>{{ form.value | json }}</pre> -->

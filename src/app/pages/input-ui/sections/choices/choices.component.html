@@ -1,0 +1,64 @@
+<div class="">
+  <label [for]="name" class="form-label">{{ label }}</label>
+  @if (type == 'radio') {
+  <div class="d-flex gap-3 align-items-center">
+    @for (radio of options; track $index) {
+    <div class="form-check">
+      <input
+        style="
+          width: 1.1rem;
+          height: 1.1rem;
+          accent-color: var(--theme-primary);
+        "
+        class="form-check-input mt-0"
+        type="radio"
+        (change)="changeValue($event)"
+        (keyup)="changeValue($event)"
+        [name]="name"
+        [id]="radio.label"
+        [value]="radio.value"
+        [formControl]="control"
+      />
+      <label
+        class="form-check-label ml-1 font-weight-bold m-0 {{
+          control.value == radio.value && 'text-primary'
+        }}"
+        [for]="radio.label"
+      >
+        {{ radio.label }}
+      </label>
+    </div>
+    }
+  </div>
+  <!--  -->
+  } @else {
+  <div class="d-flex gap-3 align-items-center">
+    <div class="form-check">
+      <input
+        style="
+          width: 1.1rem;
+          height: 1.1rem;
+          accent-color: var(--theme-primary);
+        "
+        class="form-check-input mt-0"
+        type="checkbox"
+        (change)="changeValue($event)"
+        (keyup)="changeValue($event)"
+        [name]="name"
+        [id]="name"
+        [value]="value"
+        [formControl]="control"
+      />
+
+      <label
+        class="form-check-label ml-1 m-0 {{
+          control.value != value && 'text-primary'
+        }}"
+      >
+        {{ infoText }}.
+      </label>
+    </div>
+  </div>
+  <!--  -->
+  }
+</div>

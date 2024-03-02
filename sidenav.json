@@ -1,0 +1,45 @@
+{
+  "main": [
+    {
+      "icon": "fal fa-info-circle",
+      "name": "Application Intel",
+      "class": "class-name",
+      "count": null,
+      "active": true,
+      "children": [
+        {
+          "name": "Analytics Dashboard",
+          "path": "application-intel/analytics-dashboard",
+          "active-child": true
+        },
+        {
+          "name": "Marketing Dashboard",
+          "path": "application-intel/marketing-dashboard",
+          "active-child": false
+        }
+      ]
+    }
+  ],
+
+  "tools-&-components": [
+    {
+      "icon": "fal fa-window",
+      "name": "UI Components",
+      "class": "class-name",
+      "count": 3445,
+      "active": false,
+      "children": [
+        {
+          "name": "Alerts",
+          "path": "ui-components/alerts",
+          "active-child": false
+        },
+        {
+          "name": "Accordions",
+          "path": "ui-components/accordions",
+          "active-child": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a routerLink="/" routerLinkActive="active">Home</a>
+  </li>
+  @for (path of pathsArray; track $index) {
+  <li class="breadcrumb-item">
+    <a
+      disabled
+      routerLink="/{{ pathsArray.slice(0, $index + 1).join('/') }}"
+      routerLinkActive="active"
+    >
+      {{ path }}
+    </a>
+  </li>
+  }
+</ol>

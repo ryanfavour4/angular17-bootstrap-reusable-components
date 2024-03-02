@@ -1,0 +1,17 @@
+<div class="form-group {{ class }}">
+  <label [for]="name">{{ label }}</label>
+  <textarea
+    name="{{ name }}"
+    placeholder="{{ placeholder }}"
+    value="{{ value }}"
+    required="{{ required }}"
+    (change)="changeValue($event)"
+    (keyup)="changeValue($event)"
+    [id]="name"
+    class="form-control {{ inputClass }}"
+    [readOnly]="readonly"
+    [formControl]="control"
+    [rows]="rows"
+  ></textarea>
+  <span class="help-block"> {{ infoText }} </span>
+</div>

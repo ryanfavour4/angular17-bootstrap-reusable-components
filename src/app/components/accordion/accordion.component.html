@@ -1,0 +1,9 @@
+<section class="accordion panel">
+  <div class="tab">
+    <input type="checkbox" name="accordion-1" [id]="tag" checked />
+    <label [for]="tag" class="tab__label">{{ title }}</label>
+    <div class="tab__content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</section>

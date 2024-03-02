@@ -1,0 +1,292 @@
+<div class="table-component col-xl-12">
+  <div
+    id="panel-1"
+    class="table-component-panel panel {{
+      isPrinting ? 'panel-fullscreen' : ''
+    }}"
+  >
+    <div class="panel-hdr">
+      <h2>
+        {{ title }} <span class="fw-300"><i>Table</i></span>
+      </h2>
+
+      <div class="d-flex align-items-center gap-2">
+        <app-button
+          (click)="openDeleteConfirmModal()"
+          icon="fa-times"
+          size="sm"
+          variant="danger"
+          [disabled]="objectEmpty(itemSelected)"
+          [class]="objectEmpty(itemSelected) ? 'disabled' : ''"
+        >
+          Delete
+        </app-button>
+        <app-button
+          (click)="toggleFormModalOpen('edit')"
+          icon="fa-edit"
+          size="sm"
+          variant="info"
+          [disabled]="objectEmpty(itemSelected)"
+          [class]="objectEmpty(itemSelected) ? 'disabled' : ''"
+        >
+          Edit
+        </app-button>
+        <app-button
+          (click)="toggleFormModalOpen('add')"
+          icon="far fa-plus"
+          size="sm"
+          variant="success"
+        >
+          Add
+        </app-button>
+        <div class="panel-toolbar" [ngClass]="tablePopupOpen ? 'show' : ''">
+          <app-button (click)="toggleTablePopup()" size="sm" variant="primary">
+            Table Style
+          </app-button>
+          <!-- TABLE STYLE POPUP OVERLAY -->
+          <div
+            class="dropdown-menu dropdown-menu-animated dropdown-menu-right show"
+            style="
+              position: absolute;
+              top: 40px;
+              left: 60vw;
+              max-width: 400px;
+              will-change: top, right;
+            "
+          >
+            <button class="dropdown-item active">Bordered Table</button>
+            <button
+              class="dropdown-item"
+              [ngClass]="tableSmall ? 'active' : ''"
+              (click)="toggleTableSmall()"
+            >
+              Smaller Table
+            </button>
+            <button
+              class="dropdown-item"
+              [ngClass]="tableDarkMode ? 'active' : ''"
+              (click)="toggleTableDarkMode()"
+            >
+              Table Dark
+            </button>
+            <button class="dropdown-item active">Table Hover</button>
+            <button class="dropdown-item active">Table Stripped</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-container show">
+      <div class="panel-content">
+        <!-- {{tableLabelDescripion}} -->
+        <br />
+        <div class="row mb-3">
+          <div
+            class="col-sm-2 col-md-6 d-flex align-items-center justify-content-start"
+          >
+            <form
+              class="dataTables_filter has-length"
+              (submit)="onSubmitSearch()"
+            >
+              <label class="d-flex"
+                ><button
+                  class="input-group-text d-inline-flex width-3 align-items-center justify-content-center border-bottom-right-radius-0 border-top-right-radius-0 border-right-0"
+                >
+                  <i class="fal fa-search"></i>
+                </button>
+                <input
+                  type="search"
+                  class="form-control border-top-left-radius-0 border-bottom-left-radius-0 ml-0 width-lg shadow-inset-1"
+                  placeholder="Search"
+                  (keyup)="searchTermChange($event)"
+                  [value]="searchTerm"
+              /></label>
+            </form>
+          </div>
+          <div
+            class="col-sm-12 col-md-6 row-2-feature-buttons d-flex align-items-center justify-content-end"
+          >
+            <!-- PRINTING BUTTONS -->
+            <div class="dt-buttons mr-2">
+              <app-button
+                variant="danger"
+                size="sm"
+                styleType="outline"
+                class="mr-1"
+                (click)="exportToPdf()"
+              >
+                <span>PDF</span>
+              </app-button>
+
+              <app-button
+                variant="success"
+                size="sm"
+                styleType="outline"
+                class="mr-1"
+                (click)="exportToCSV()"
+              >
+                <span>CSV</span>
+              </app-button>
+
+              <app-button
+                variant="info"
+                size="sm"
+                styleType="outline"
+                class="mr-1"
+                (click)="copyDataToClipboard()"
+              >
+                <span>Copy</span>
+              </app-button>
+
+              <app-button
+                variant="primary"
+                size="sm"
+                styleType="outline"
+                (click)="printTable()"
+              >
+                <span>Print</span>
+              </app-button>
+            </div>
+            <div class="dataTables_length" id="dt-basic-example_length">
+              <label class="d-flex align-items-center"
+                >Show
+                <select
+                  name="dt-basic-example_length"
+                  aria-controls="dt-basic-example"
+                  class="form-control custom-select mx-2"
+                  [(ngModel)]="itemsPerPage"
+                >
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  <option [value]="data.length">All</option>
+                </select>
+                entries</label
+              >
+            </div>
+          </div>
+        </div>
+        <!-- datatable start -->
+        <div class="custom-scrollbar table-parent-div">
+          <table
+            id="dt-basic-example"
+            class="table table-bordered table-hover table-striped w-100 dataTable dtr-inline collapsed 
+          {{ tableSmall ? 'table-sm' : '' }}
+          {{ tableDarkMode ? 'table-dark' : '' }}"
+          >
+            <thead>
+              <tr>
+                @for (item of tableHead; track $index) {
+                <th
+                  (click)="
+                    item.sortBy
+                      ? sortByToggle(item.sortBy, item.sortByType)
+                      : null
+                  "
+                  class="{{ item.sortBy ? 'sorting_asc' : '' }}"
+                >
+                  {{ item.title }}
+                </th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (data of currentDataInView; track $index) {
+              <tr
+                class="{{
+                  jsonStringify(data) == jsonStringify(itemSelected)
+                    ? 'selected'
+                    : ''
+                }}"
+                (click)="onRowSelected(data)"
+              >
+                @for (item of dataKeys; track $index) {
+                <td
+                  class="{{
+                    jsonStringify(data) == jsonStringify(itemSelected)
+                      ? 'selected'
+                      : ''
+                  }} "
+                >
+                  {{ data[item] }}
+                </td>
+                }
+              </tr>
+              }
+            </tbody>
+            <tfoot>
+              <tr>
+                @for (item of tableHead; track $index) {
+                <th>
+                  {{ item.title }}
+                </th>
+                }
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- datatable end -->
+
+        <app-paginations
+          [totalDataLength]="filteredData.length"
+          [(rowsPerPage)]="itemsPerPage"
+          [(currentPage)]="currentPage"
+        ></app-paginations>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT TO DELETE MODAL -->
+<app-modal-alert
+  title="Confirm Delete"
+  [description]="
+    itemSelected && uniqueColumn
+      ? 'Are you sure you want to this delete row with the ' +
+        tableHead[uniqueColumn].title +
+        ' : ' +
+        itemSelected[dataKeys[uniqueColumn]].toString()
+      : 'Are you sure you want to delete this row. Deleting this row cannot be undone'
+  "
+  [(open)]="deleteConfirmModal"
+  (onSave)="onRowDelete()"
+></app-modal-alert>
+<!-- DELTED ALERT -->
+<app-toast></app-toast>
+
+<!-- MODAL FOR ADD AND EDIT -->
+<div
+  class="modal fade {{ formModalOpen ? 'show' : '' }}"
+  id="altEditor-modal-07968402900745661"
+  tabindex="-1"
+  role="dialog"
+  style="background: rgba(37, 37, 37, 0.6)"
+  [ngStyle]="{ display: formModalOpen ? 'block' : 'none' }"
+  aria-modal="true"
+  (click)="toggleFormModalOpen()"
+>
+  <div class="modal-dialog">
+    <div (click)="preventBubbling($event)" class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">{{ title }}</h3>
+        <button class="close" (click)="toggleFormModalOpen()">
+          <span aria-hidden="true"><i class="fal fa-times"></i></span>
+        </button>
+      </div>
+      <div class="modal-body mt-0 pt-0 p-0">
+        <ng-content></ng-content>
+      </div>
+      @if (showButtons) {
+      <div class="modal-footer">
+        <app-button (click)="toggleFormModalOpen()">Cancel</app-button>
+        <app-button variant="primary" (click)="toggleFormModalOpen()">
+          Add
+        </app-button>
+      </div>
+      }
+    </div>
+  </div>
+</div>

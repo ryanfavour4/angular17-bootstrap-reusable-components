@@ -1,0 +1,88 @@
+<!-- Buttons Variant -->
+<!-- 'primary'
+    | 'secondary'
+    | 'success'
+    | 'info'
+    | 'warning'
+    | 'danger'
+    | 'dark'
+    | 'light'
+    | 'default' - 'default'; -->
+<app-accordion
+  title="Button Variant | <app-button variant='primary'>Button</app-button>"
+  tag="btn"
+>
+  <div class="demo">
+    <app-button variant="primary" (click)="fire()">Primary</app-button>
+    <app-button variant="secondary">Secondary</app-button>
+    <app-button variant="danger">Danger</app-button>
+    <app-button variant="dark">Dark</app-button>
+    <app-button variant="default">Default</app-button>
+    <app-button variant="info">Info</app-button>
+    <app-button variant="light">Light</app-button>
+    <app-button variant="success">Success</app-button>
+    <app-button variant="warning">Warning</app-button>
+  </div>
+</app-accordion>
+
+<!-- Button with Icons -->
+<!-- fas  -  fa solid -->
+<!-- fal  -  fa light -->
+<!-- far  -  fa regular -->
+<!-- Default fal -->
+<!-- https://fontawesome.com/v5/search?m=free -->
+<!-- https://fontawesome.com/search?o=r&m=free -->
+<app-accordion
+  title="Button With Icons | <app-button icon='fa-bug'>Icon Btn</app-button>"
+  tag="btn-icons"
+>
+  <div class="demo">
+    <app-button variant="primary" icon="fa-user">User</app-button>
+    <app-button variant="secondary" icon="far fa-user">User</app-button>
+    <app-button variant="danger" icon="fas fa-user">User</app-button>
+
+    <app-button variant="dark" icon="fa-face-smile">Smile</app-button>
+    <app-button variant="default" icon="far fa-face-smile">Smile</app-button>
+    <app-button variant="info" icon="fas fa-face-smile">Info</app-button>
+
+    <app-button variant="light" icon="fa-download">Download</app-button>
+    <app-button variant="success" icon="far fa-download">Download</app-button>
+    <app-button variant="warning" icon="fas fa-download">Download</app-button>
+  </div>
+</app-accordion>
+
+<!-- Large Buttons -->
+<!-- lg - Large Buttons -->
+<!-- md - Medium Buttons -->
+<!-- sm - Small Buttons -->
+<!-- Default - md (Medium Buttons) -->
+<app-accordion
+  title="Button Sizes | <app-button size='lg'>Large Btn</app-button>"
+  tag="btn-size"
+>
+  <div class="demo">
+    <app-button variant="primary" icon="fa-user" size="lg">User</app-button>
+    <app-button variant="secondary" icon="far fa-user" size="lg"
+      >User</app-button
+    >
+    <app-button variant="danger" icon="fas fa-user" size="lg">User</app-button>
+
+    <app-button variant="dark" icon="fa-face-smile" size="md">Smile</app-button>
+    <app-button variant="default" icon="far fa-face-smile" size="md"
+      >Smile</app-button
+    >
+    <app-button variant="info" icon="fas fa-face-smile" size="md"
+      >Info</app-button
+    >
+
+    <app-button variant="light" icon="fa-download" size="sm"
+      >Download</app-button
+    >
+    <app-button variant="success" icon="far fa-download" size="sm"
+      >Download</app-button
+    >
+    <app-button variant="warning" size="sm" icon="fas fa-download" size="sm"
+      >Download</app-button
+    >
+  </div>
+</app-accordion>

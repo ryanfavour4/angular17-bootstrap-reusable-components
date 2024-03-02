@@ -1,0 +1,23 @@
+<app-tables
+  [(data)]="userData"
+  title="{{ addModalClicked ? 'Add New Country' : 'Edit Country' }}"
+  (itemSelectedChange)="setItemSelected($event)"
+  [tableHead]="tableHeadData"
+  (onModalButtonsClicked)="toggleModalTypeClicked($event)"
+>
+  @if (addModalClicked) {
+  <app-reactive-form
+    description="Group a series of buttons together on a single line with the button group, and super-power them with JavaScript."
+    [formDataObj]="countryForm"
+    (onFormSubmit)="formSubmit($event)"
+    style="max-width: 600px; margin: auto; box-shadow: none; border: 0"
+  />
+  }@else {
+  <app-reactive-form
+    description="Group a series of buttons together on a single line with the button group, and super-power them with JavaScript."
+    [formDataObj]="countryForm"
+    (onFormSubmit)="formSubmit($event)"
+    style="max-width: 600px; margin: auto; box-shadow: none; border: 0"
+  />
+  }
+</app-tables>

@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-sm-12 col-md-5">
+    <div
+      class="dataTables_info"
+      id="dt-basic-example_info"
+      role="status"
+      aria-live="polite"
+    >
+      Showing {{ startIndex + 1 }} to {{ endIndex }} of
+      {{ totalDataLength }} entries
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-7">
+    <div
+      class="dataTables_paginate paging_simple_numbers"
+      id="dt-basic-example_paginate"
+    >
+      <ul class="pagination justify-content-end">
+        <li
+          (click)="changePage('prev')"
+          class="paginate_button page-item previous
+          {{ currentPage === 1 && 'disabled pe-none' }}"
+          id="dt-basic-example_previous"
+        >
+          <a
+            aria-controls="dt-basic-example"
+            data-dt-idx="0"
+            tabindex="0"
+            class="page-link"
+            ><i class="fal fa-chevron-left"></i
+          ></a>
+        </li>
+
+        @for (number of pageNumbers; track $index) {
+        <li
+          (click)="gotoPage(number)"
+          class="paginate_button page-item cursor-pointer {{
+            number === currentPage && 'active'
+          }}"
+        >
+          <a
+            aria-controls="dt-basic-example"
+            data-dt-idx="3"
+            tabindex="0"
+            class="page-link"
+            >{{ number }}</a
+          >
+        </li>
+        }
+
+        <li
+          (click)="changePage('next')"
+          class="paginate_button page-item next 
+          {{ currentPage === totalPages && 'disabled pe-none' }}"
+          id="dt-basic-example_next"
+        >
+          <a
+            aria-controls="dt-basic-example"
+            data-dt-idx="7"
+            tabindex="0"
+            class="page-link"
+            ><i class="fal fa-chevron-right"></i
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

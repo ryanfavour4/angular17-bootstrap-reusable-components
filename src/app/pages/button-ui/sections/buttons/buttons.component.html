@@ -1,0 +1,16 @@
+<button
+  [disabled]="disabled"
+  [type]="type"
+  class="btn waves-effect waves-themed 
+  btn-{{ styleType }}-{{ variant }}
+  btn-{{ size }} 
+  btn-{{ styleType == 'fill' ? variant : null }}"
+  [ngClass]="disabled === true ? 'disabled' : ''"
+>
+  @if (icon?.length && !icon?.includes('fa-')){
+  {{ throwIconTypeError() }}
+  } @else if(icon?.length){
+  <span class="fal {{ icon }} mr-1"></span>
+  }
+  <ng-content></ng-content>
+</button>

@@ -1,0 +1,19 @@
+@if (message) {
+<div class="top-right-fixed toast fade show position-fixed animateIn">
+  <div class="toast-header">
+    <img src="/assets/img/logo.png" alt="brand-logo" height="16" class="mr-2" />
+    <strong class="mr-auto">SmartAdmin</strong>
+    <small>{{ timeNow }}</small>
+    <button
+      (click)="close()"
+      type="button"
+      class="ml-2 close"
+      data-dismiss="toast"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="toast-body">{{ message }}.</div>
+</div>
+}

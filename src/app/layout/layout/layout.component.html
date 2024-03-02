@@ -1,0 +1,189 @@
+<!-- BEGIN Body -->
+<!-- Possible Classes
+		* 'header-function-fixed'         - header is in a fixed at all times
+		* 'nav-function-fixed'            - left panel is fixed    ==============  /!! done
+		* 'nav-function-minify'			        - skew nav to maximize space
+		* 'nav-function-hidden'           - roll mouse on edge to reveal
+		* 'nav-function-top'              - relocate left pane to top
+		* 'mod-main-boxed'                - encapsulates to a container
+		* 'nav-mobile-push'               - content pushed on menu reveal
+		* 'nav-mobile-no-overlay'         - removes mesh on menu reveal
+		* 'nav-mobile-slide-out'          - content overlaps menu
+		* 'mod-bigger-font'               - content fonts are bigger for readability
+		* 'mod-high-contrast'             - 4.5:1 text contrast ratio
+		* 'mod-color-blind'               - color vision deficiency
+		* 'mod-pace-custom'               - preloader will be inside content
+		* 'mod-clean-page-bg'             - adds more whitespace
+		* 'mod-hide-nav-icons'            - invisible navigation icons
+		* 'mod-disable-animation'         - disables css based animations
+		* 'mod-hide-info-card'            - hides info card from left panel
+		* 'mod-lean-subheader'            - distinguished page header
+		* 'mod-nav-link'                  - clear breakdown of nav links
+		* 'mod-skin-dark'                 - changes the theme mode to dark theme
+
+		>>> more settings are described inside documentation page >>>
+	-->
+<body
+  class="mod-bg-1 mod-nav-link desktop chrome webkit mobile-view-activated pace-done modal-open mod-skin-drk"
+  [ngClass]="navFunctionFixed ? 'nav-function-fixed' : ''"
+  [ngClass]="navFunctionHidden ? 'nav-function-hidden' : ''"
+  [ngClass]="navFunctionMinify ? 'nav-function-minify' : ''"
+  [ngClass]="mobileNavFunctionFixed ? 'mobile-nav-on' : ''"
+  [ngClass]="topNavFunctionFixed ? 'nav-function-top' : ''"
+>
+  <!-- BEGIN Page Wrapper -->
+  <div class="page-wrapper">
+    <div class="page-inner">
+      <!-- !!!! ========= SIDE NAV BAR ========== !!!!!! -->
+      <!-- !!!! ========= SIDE NAV BAR ========== !!!!!! -->
+      <!-- !!!! ========= SIDE NAV BAR ========== !!!!!! -->
+      <app-sidebar
+        (toggleNavFunctionMinify)="toggleNavFunctionMinify()"
+        [topNavFunctionFixed]="topNavFunctionFixed"
+      ></app-sidebar>
+
+      <div class="page-content-wrapper">
+        <!-- !!!! ========= TOP BAR ========== !!!!!! -->
+        <!-- !!!! ========= TOP BAR ========== !!!!!! -->
+        <!-- !!!! ========= TOP BAR ========== !!!!!! -->
+        <app-topbar
+          (toggleNavFunctionFixed)="toggleNavFunctionFixed()"
+          (toggleMobileNavFunctionHidden)="toggleMobileNavFunctionHidden()"
+          (toggleNavFunctionMinify)="toggleNavFunctionMinify()"
+          (toggleNavFunctionHidden)="toggleNavFunctionHidden()"
+          (toggleTopFunctionFixed)="toggleTopFunctionFixed()"
+        ></app-topbar>
+        <!-- BEGIN Page Content -->
+        <!-- the #js-page-content id is needed for some plugins to initialize -->
+
+        <main id="js-page-content" role="main" class="page-content">
+          <!-- !!!! ========= BREAD CRUMBS ========== !!!!!! -->
+          <!-- !!!! ========= BREAD CRUMBS ========== !!!!!! -->
+          <!-- !!!! ========= BREAD CRUMBS ========== !!!!!! -->
+          <ol class="breadcrumb page-breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0);">SmartAdmin</a>
+            </li>
+            <li class="breadcrumb-item">Application Intel</li>
+            <li class="breadcrumb-item active">Analytics Dashboard</li>
+            <li class="position-absolute pos-top pos-right d-none d-sm-block">
+              <span class="js-get-date"></span>
+            </li>
+          </ol>
+
+          <div class="subheader">
+            <h1 class="subheader-title">
+              <i class="subheader-icon fal fa-chart-area"></i> {{ titleBold }}
+              <span class="fw-300">{{ titleSlim }}</span>
+            </h1>
+            <div class="subheader-block d-lg-flex align-items-center">
+              <div
+                class="d-inline-flex flex-column justify-content-center mr-3"
+              >
+                <span class="fw-300 fs-xs d-block opacity-50">
+                  <small>EXPENSES</small>
+                </span>
+                <span class="fw-500 fs-xl d-block color-primary-500">
+                  $47,000
+                </span>
+              </div>
+              <span
+                class="sparklines hidden-lg-down"
+                sparkType="bar"
+                sparkBarColor="#886ab5"
+                sparkHeight="32px"
+                sparkBarWidth="5px"
+                values="3,4,3,6,7,3,3,6,2,6,4"
+              ></span>
+            </div>
+            <div
+              class="subheader-block d-lg-flex align-items-center border-faded border-right-0 border-top-0 border-bottom-0 ml-3 pl-3"
+            >
+              <div
+                class="d-inline-flex flex-column justify-content-center mr-3"
+              >
+                <span class="fw-300 fs-xs d-block opacity-50">
+                  <small>MY PROFITS</small>
+                </span>
+                <span class="fw-500 fs-xl d-block color-danger-500">
+                  $38,500
+                </span>
+              </div>
+              <span
+                class="sparklines hidden-lg-down"
+                sparkType="bar"
+                sparkBarColor="#fe6bb0"
+                sparkHeight="32px"
+                sparkBarWidth="5px"
+                values="1,4,3,6,5,3,9,6,5,9,7"
+              ></span>
+            </div>
+          </div>
+
+          <!-- !!!!!! ========= ALL MAIN LAYOUT CHILDREN CONTENT GOES IN HERE ============ !!!!!! -->
+          <!-- !!!!!! ========= ALL MAIN LAYOUT CHILDREN CONTENT GOES IN HERE ============ !!!!!! -->
+          <!-- !!!!!! ========= ALL MAIN LAYOUT CHILDREN CONTENT GOES IN HERE ============ !!!!!! -->
+          <ng-content></ng-content>
+          <!-- !!!!!! ========= ALL MAIN LAYOUT CHILDREN CONTENT GOES IN HERE ============ !!!!!! -->
+          <!-- !!!!!! ========= ALL MAIN LAYOUT CHILDREN CONTENT GOES IN HERE ============ !!!!!! -->
+          <!-- !!!!!! ========= ALL MAIN LAYOUT CHILDREN CONTENT GOES IN HERE ============ !!!!!! -->
+        </main>
+        <!-- !! this overlay is activated only when mobile menu is triggered -->
+        <div
+          class="page-content-overlay"
+          data-class="mobile-nav-on"
+          (click)="toggleMobileNavFunctionHidden()"
+        ></div>
+        <!-- END Page Content -->
+        <!-- !!!!!! ========= FOOTER ============ !!!!!! -->
+        <!-- !!!!!! ========= FOOTER ============ !!!!!! -->
+        <!-- !!!!!! ========= FOOTER ============ !!!!!! -->
+        <!-- BEGIN Page Footer -->
+        <footer class="page-footer" role="contentinfo">
+          <div class="d-flex align-items-center flex-1 text-muted">
+            <span class="hidden-md-down fw-700"
+              >2020 © SmartAdmin by&nbsp;<a
+                href="https://www.gotbootstrap.com"
+                class="text-primary fw-500"
+                title="gotbootstrap.com"
+                target="_blank"
+                >gotbootstrap.com</a
+              ></span
+            >
+          </div>
+          <div>
+            <ul class="list-table m-0">
+              <li>
+                <a href="intel_introduction.html" class="text-secondary fw-700"
+                  >About</a
+                >
+              </li>
+              <li class="pl-3">
+                <a href="info_app_licensing.html" class="text-secondary fw-700"
+                  >License</a
+                >
+              </li>
+              <li class="pl-3">
+                <a href="info_app_docs.html" class="text-secondary fw-700"
+                  >Documentation</a
+                >
+              </li>
+              <li class="pl-3 fs-xl">
+                <a
+                  href="https://wrapbootstrap.com/user/MyOrange"
+                  class="text-secondary"
+                  target="_blank"
+                  ><i class="fal fa-question-circle" aria-hidden="true"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </footer>
+        <!-- END Page Footer -->
+      </div>
+    </div>
+  </div>
+  <!-- END Page Wrapper -->
+  <!-- BEGIN Quick Menu -->
+</body>
+<!-- END Body -->

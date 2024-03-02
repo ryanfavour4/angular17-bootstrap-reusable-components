@@ -1,0 +1,57 @@
+<div class="">
+  <br />
+  <!-- MODAL DEFAULT -->
+  <!-- MODAL DEFAULT -->
+  <app-button variant="info" (click)="toggleModal()">
+    OPEN DEFAULT MODAL
+  </app-button>
+  <app-modals [(open)]="isOpen">
+    I called like that he ain't ball like him
+  </app-modals>
+  <br />
+
+  <!-- MODAL LEFT-->
+  <!-- MODAL LEFT-->
+  <app-button variant="info" (click)="toggleIsLeftOpenModal()">
+    OPEN LEFT MODAL
+  </app-button>
+  <app-modals direction="left" [(open)]="isLeftOpen">
+    I called like that he ain't ball like him
+  </app-modals>
+  <br />
+
+  <!-- MODAL TOP -->
+  <!-- MODAL TOP -->
+  <app-button variant="info" (click)="toggleIsTopOpenModal()">
+    OPEN TOP MODAL
+  </app-button>
+  <app-modals direction="top" [(open)]="isTopOpen">
+    I called like that he ain't ball like him
+  </app-modals>
+  <br />
+
+  <!-- MODAL CENTER -->
+  <!-- MODAL CENTER -->
+  <app-button variant="info" (click)="toggleIsCenterOpenModal()">
+    OPEN CENTER MODAL
+  </app-button>
+  <app-modals direction="centered" [(open)]="isCenterOpen">
+    I called like that he ain't ball like him
+  </app-modals>
+
+  <app-modal-alert></app-modal-alert>
+</div>
+
+<!-- MODAL ALERT -->
+<br />
+<h4>Modal Alert</h4>
+<app-button
+  icon="fa-window"
+  variant="dark"
+  (click)="toggleIsModalAlertOpenModal()"
+>
+  OPEN MODAL ALERT
+</app-button>
+<app-modal-alert title="This is a modal alert" [(open)]="isModalAlertOpen">
+  This is a working alert, woohoo!
+</app-modal-alert>

@@ -1,0 +1,46 @@
+th p {
+  margin: 0 !important;
+  margin-right: 18px;
+}
+@media (max-width: 992px) {
+  .table-component {
+    padding: 0px !important;
+    overflow-x: hidden;
+  }
+
+  .table-parent-div {
+    overflow-x: scroll;
+  }
+
+  th,
+  td {
+    text-wrap: nowrap;
+    margin-right: 16px;
+    width: fit-content;
+  }
+
+  .dataTables_filter {
+    width: 100%;
+  }
+
+  .panel-hdr {
+    flex-direction: column;
+    align-items: center;
+        padding-bottom: 0.6rem;
+  }
+
+  .panel-hdr > :last-child {
+    padding-right: 0 !important;
+  }
+
+  .row-2-feature-buttons {
+    margin-top: 0.6rem;
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: flex-start !important;
+  }
+
+  .row-2-feature-buttons > div {
+    align-items: flex-start;
+  }
+}

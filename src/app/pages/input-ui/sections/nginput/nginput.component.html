@@ -1,0 +1,102 @@
+@if(type === 'file'){
+<div class="form-group {{ class }} {{ layout == 'horizontal' ? 'row' : '' }}">
+  <label
+    class="form-label {{
+      layout == 'horizontal'
+        ? 'col-sm-3 col-form-label text-left text-sm-right'
+        : ''
+    }} "
+    [for]="name"
+    >{{ label }}</label
+  >
+  <div class="custom-file {{ layout == 'horizontal' ? 'col-lg-9' : '' }}">
+    <input
+      type="file"
+      class="custom-file-input"
+      name="{{ name }}"
+      value="{{ value }}"
+      required="{{ required }}"
+      (change)="changeValue($event)"
+      (keyup)="changeValue($event)"
+      [id]="name"
+      [formControl]="control"
+    />
+    <label class="custom-file-label" for="customFile">{{
+      placeholder || "Choose File"
+    }}</label>
+  </div>
+  <span class="help-block">
+    {{ infoText }}
+  </span>
+</div>
+
+} @else if (type == "username") {
+<div class="form-group {{ class }} {{ layout == 'horizontal' ? 'row' : '' }}">
+  <label
+    class="form-label {{
+      layout == 'horizontal'
+        ? 'col-sm-3 col-form-label text-left text-sm-right'
+        : ''
+    }}"
+    [for]="name"
+    >{{ label }}</label
+  >
+  <div
+    class="input-group
+    {{ layout == 'horizontal' ? 'col-lg-9 p-0' : '' }}
+    {{ inputClass }}"
+  >
+    <div class="input-group-prepend">
+      <div style="padding: 0.4rem 0.875rem" class="input-group-text">&#64;</div>
+    </div>
+    <input
+      type="text"
+      name="{{ name }}"
+      placeholder="{{ placeholder }}"
+      value="{{ value }}"
+      required="{{ required }}"
+      (change)="changeValue($event)"
+      (keyup)="changeValue($event)"
+      [id]="name"
+      class="form-control"
+      [readOnly]="readonly"
+      [formControl]="control"
+    />
+  </div>
+  <span class="help-block">
+    {{ infoText }}
+  </span>
+</div>
+<!-- END OF USERNAME TYPE INPUT -->
+} @else{
+<div class="form-group {{ class }} {{ layout == 'horizontal' ? 'row' : '' }}">
+  <label
+    class="form-label {{
+      layout == 'horizontal'
+        ? 'col-sm-3 col-form-label text-left text-sm-right'
+        : ''
+    }}"
+    [for]="name"
+    >{{ label }}</label
+  >
+  <input
+    type="{{ type }}"
+    name="{{ name }}"
+    placeholder="{{ placeholder }}"
+    value="{{ value }}"
+    required="{{ required }}"
+    (change)="changeValue($event)"
+    (keyup)="changeValue($event)"
+    [id]="name"
+    class="{{ inputClassName }} 
+    {{ layout == 'horizontal' ? 'col-lg-9' : '' }}
+    {{ inputClass }}
+    "
+    [readOnly]="readonly"
+    [formControl]="control"
+  />
+  <span class="help-block">
+    {{ infoText }}
+  </span>
+</div>
+}

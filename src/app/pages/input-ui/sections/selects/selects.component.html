@@ -1,0 +1,58 @@
+<div class="form-group {{ class }}">
+  @if(layout == 'multiple'){
+  <label [for]="name" class="form-label">{{ label }}</label>
+  <select
+    multiple
+    class="form-control"
+    [id]="name"
+    [formControl]="control"
+    (change)="changeValue($event)"
+    (keyup)="changeValue($event)"
+    [name]="name"
+    [value]="value"
+  >
+    @for (option of options; track $index) {
+    <option
+      style="padding-block: 0.5rem"
+      [ngStyle]="{
+        'background-color':
+          control.value == option.value ? 'var(--theme-primary)' : '',
+        color: control.value == option.value ? 'var(--theme-primary-50)' : '',
+        'font-weight': control.value == option.value ? '600' : ''
+      }"
+      [value]="option.value"
+    >
+      {{ option.label }}
+    </option>
+    }
+  </select>
+  } @else{
+  <label class="form-label" [for]="name">{{ label }}</label>
+  <select
+    [formControl]="control"
+    class="custom-select form-control"
+    [id]="name"
+    (change)="changeValue($event)"
+    (keyup)="changeValue($event)"
+    [name]="name"
+    [value]="value"
+  >
+    @for (option of options; track $index) {
+    <option
+      [ngStyle]="{
+        'background-color':
+          control.value == option.value ? 'var(--theme-primary)' : '',
+        color: control.value == option.value ? 'var(--theme-primary-50)' : '',
+        'font-weight': control.value == option.value ? '600' : ''
+      }"
+      [value]="option.value"
+    >
+      {{ option.label }}
+    </option>
+    }
+  </select>
+  }
+  <span class="help-block">
+    {{ infoText }}
+  </span>
+</div>
